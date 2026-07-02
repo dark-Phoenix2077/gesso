@@ -1,0 +1,299 @@
+{% extends "base.html" %}
+
+{% block title %}Gesso – Young Artist Platform{% endblock %}
+
+{% block head_extra %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Your fonts, Tailwind CDN, and custom styles go here -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            'gesso-bg': '#02040A',
+            'gesso-card': '#050816',
+          },
+          boxShadow: {
+            'glow': '0 0 60px rgba(129, 140, 248, 0.35)',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: radial-gradient(circle at top, #0b1120 0, #020617 45%, #000000 100%);
+      color: white;
+    }
+    .noise {
+      position: fixed;
+      inset: 0;
+      opacity: 0.12;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1600 900' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='noStitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.9'/%3E%3C/svg%3E");
+      mix-blend-mode: soft-light;
+      z-index: 0;
+    }
+  </style>
+{% endblock %}
+
+{% block body %}
+<div class="noise"></div>
+
+<div class="min-h-screen flex flex-col relative z-10">
+  <!-- Top nav -->
+  <header class="w-full border-b border-white/5 backdrop-blur bg-black/40">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="h-8 w-8 rounded-lg bg-gradient-to-br from-indigo-500 via-purple-500 to-emerald-400 shadow-glow flex items-center justify-center text-xs font-semibold">
+          G
+        </div>
+        <div class="flex flex-col leading-tight">
+          <span class="text-sm font-semibold tracking-tight">Gesso</span>
+          <span class="text-[11px] text-neutral-400">For emerging young artists</span>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-6 text-xs text-neutral-300">
+        <a href="#gallery" class="hover:text-white transition-colors">Explore artworks</a>
+        <a href="#challenges" class="hover:text-white transition-colors">Competitions</a>
+        <a href="#mentors" class="hover:text-white transition-colors">Mentorship</a>
+        <a href="#skills" class="hover:text-white transition-colors">Skills</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="{{ url_for('auth.login') }}"
+           class="hidden sm:inline-flex text-xs px-3 py-1.5 rounded-md border border-neutral-700 text-neutral-300 hover:border-neutral-500 hover:text-white transition-colors">
+          Log in
+        </a>
+        <a href="{{ url_for('auth.signup') }}"
+           class="inline-flex text-xs px-3.5 py-1.5 rounded-md bg-white text-black font-medium hover:bg-neutral-100 transition-colors">
+          Join the beta
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero section -->
+  <main class="flex-1">
+    <section class="max-w-6xl mx-auto px-4 pt-10 pb-16 lg:pb-24">
+      <div class="flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
+        <!-- Left: main pitch -->
+        <div class="w-full lg:w-1/2 space-y-6">
+          <div class="inline-flex items-center gap-2 px-2 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[11px] text-emerald-300">
+            <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>Private beta · Designed for 14–20 year old artists</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight">
+            The portfolio and playground
+            <span class="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-sky-400 to-emerald-300">
+              built for young artists
+            </span>
+          </h1>
+
+          <p class="text-sm sm:text-base text-neutral-300 max-w-xl leading-relaxed">
+            Gesso is where emerging young creators publish serious work, get real feedback,
+            and compete in curated challenges with tangible rewards. Not a social feed.
+            A launchpad for your career.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-3 pt-2">
+            <a href="{{ url_for('auth.signup') }}"
+               class="inline-flex items-center justify-center px-4 py-2 rounded-md text-sm font-medium bg-white text-black hover:bg-neutral-100 transition-colors shadow-lg shadow-indigo-500/30">
+              Start your portfolio
+              <span class="ml-1.5 text-[11px] text-neutral-700">(takes 2 minutes)</span>
+            </a>
+
+            <a href="#gallery"
+               class="inline-flex items-center justify-center px-4 py-2 rounded-md text-xs border border-neutral-700 text-neutral-200 hover:border-neutral-500 hover:text-white transition-colors">
+              Browse example work
+            </a>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 text-[11px] text-neutral-300">
+            <div class="border border-neutral-800 rounded-lg px-3 py-2 bg-black/40">
+              <div class="text-xs font-semibold text-white">Portfolio-grade uploads</div>
+              <div class="text-[11px] text-neutral-400 mt-1">
+                High-res images, proper metadata, series and projects. Built to show work, not selfies.
+              </div>
+            </div>
+            <div class="border border-neutral-800 rounded-lg px-3 py-2 bg-black/40">
+              <div class="text-xs font-semibold text-white">Curated competitions</div>
+              <div class="text-[11px] text-neutral-400 mt-1">
+                Weekly prompts, real cash prizes, guest judges and industry mentors.
+              </div>
+            </div>
+            <div class="border border-neutral-800 rounded-lg px-3 py-2 bg-black/40">
+              <div class="text-xs font-semibold text-white">Signal over noise</div>
+              <div class="text-[11px] text-neutral-400 mt-1">
+                No follower counts. No infinite scroll. Feedback that actually helps you improve.
+              </div>
+            </div>
+            <div class="border border-neutral-800 rounded-lg px-3 py-2 bg-black/40">
+              <div class="text-xs font-semibold text-white">Built for growth</div>
+              <div class="text-[11px] text-neutral-400 mt-1">
+                Track your progress, see what resonates, and get ready for applications and galleries.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: “live board” style layout -->
+        <div class="w-full lg:w-1/2">
+          <div class="relative">
+            <div class="absolute inset-0 bg-gradient-to-tr from-indigo-500/20 via-sky-500/10 to-emerald-400/20 blur-3xl -z-10"></div>
+
+            <div class="grid grid-cols-2 gap-3 text-[11px]">
+              <!-- Column 1 -->
+              <div class="space-y-3">
+                <div class="border border-neutral-800 rounded-xl bg-gesso-card/90 p-3 flex flex-col gap-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-medium text-neutral-200">Live gallery</span>
+                    <span class="text-[10px] text-neutral-500">Curated for teens</span>
+                  </div>
+                  <div class="relative h-32 rounded-lg bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 overflow-hidden">
+                    <div class="absolute inset-0 opacity-60"
+                         style="background-image: radial-gradient(circle at 10% 20%, #4f46e5 0, transparent 45%), radial-gradient(circle at 90% 10%, #22c55e 0, transparent 55%), radial-gradient(circle at 0% 100%, #0ea5e9 0, transparent 45%);">
+                    </div>
+                    <div class="relative h-full w-full flex items-center justify-center">
+                      <div class="grid grid-cols-3 gap-1 w-32">
+                        <div class="h-10 rounded-md bg-black/40 border border-white/5"></div>
+                        <div class="h-10 rounded-md bg-black/40 border border-white/5"></div>
+                        <div class="h-10 rounded-md bg-black/40 border border-white/5"></div>
+                        <div class="h-10 rounded-md bg-black/40 border border-white/5"></div>
+                        <div class="h-10 rounded-md bg-black/40 border border-white/5"></div>
+                        <div class="h-10 rounded-md bg-black/40 border border-white/5"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="text-[11px] text-neutral-400">
+                    Discover artworks from emerging young creators around the world. A constantly evolving
+                    gallery curated by the community.
+                  </p>
+                </div>
+
+                <div class="border border-neutral-800 rounded-xl bg-gesso-card/90 p-3">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-medium text-neutral-200">Portfolio</span>
+                    <span class="text-[10px] text-emerald-400">In progress</span>
+                  </div>
+                  <p class="text-[11px] text-neutral-400">
+                    Upload artworks to your portfolio. Get honest feedback from a community of peers and mentors
+                    who understand your craft.
+                  </p>
+                  <div class="mt-2 flex items-center justify-between text-[10px] text-neutral-500">
+                    <span>Series, projects, and works-in-progress</span>
+                  </div>
+                </div>
+
+                <div class="border border-neutral-800 rounded-xl bg-gesso-card/90 p-3">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-medium text-neutral-200">Your growth</span>
+                  </div>
+                  <p class="text-[11px] text-neutral-400 mt-1">
+                    From nascent sketcher to master of the archive. Track your progress, see your style evolve,
+                    and build the narrative behind your work.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Column 2 -->
+              <div class="space-y-3">
+                <div class="border border-neutral-800 rounded-xl bg-gesso-card/90 p-3">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-medium text-neutral-200">Weekly challenges</span>
+                    <span class="text-[10px] text-sky-400">New briefs</span>
+                  </div>
+                  <p class="text-[11px] text-neutral-400">
+                    Join weekly challenges with real cash prizes. Compete with emerging artists your age and get
+                    recognized by industry professionals.
+                  </p>
+                  <div class="mt-2 flex items-center gap-2 text-[10px] text-neutral-500">
+                    <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+                    <span>Prompt: “Archive of future childhoods” · Submissions open</span>
+                  </div>
+                </div>
+
+                <div class="border border-neutral-800 rounded-xl bg-gesso-card/90 p-3">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-medium text-neutral-200">Real opportunities</span>
+                  </div>
+                  <p class="text-[11px] text-neutral-400">
+                    Top performers get featured in curated digital exhibitions and premium gallery showcases around
+                    the globe.
+                  </p>
+                </div>
+
+                <div class="border border-neutral-800 rounded-xl bg-gesso-card/90 p-3">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-medium text-neutral-200">Mentors & feedback</span>
+                  </div>
+                  <p class="text-[11px] text-neutral-400">
+                    Get real-time feedback on your artworks from a community of peers and mentors who understand
+                    your creative vision.
+                  </p>
+                </div>
+
+                <div class="border border-neutral-800 rounded-xl bg-gesso-card/90 p-3">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-medium text-neutral-200">Skill-building</span>
+                  </div>
+                  <p class="text-[11px] text-neutral-400">
+                    Master new skills with interactive courses designed specifically for young artists looking to
+                    level up their craft.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Footer blurb -->
+            <div class="mt-4 border border-dashed border-neutral-800 rounded-xl bg-black/40 px-4 py-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-[11px] text-neutral-300">
+              <div>
+                Join thousands of young creators. Share your art, win prizes, and build the portfolio that gets you
+                noticed.
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+                <span class="text-neutral-400">Early access spots are limited.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Anchor targets for nav (can be filled later with real components) -->
+    <section id="gallery" class="max-w-6xl mx-auto px-4 pb-16">
+      <!-- Placeholder section for now -->
+    </section>
+
+    <section id="challenges" class="max-w-6xl mx-auto px-4 pb-16">
+      <!-- Placeholder section for now -->
+    </section>
+
+    <section id="mentors" class="max-w-6xl mx-auto px-4 pb-16">
+      <!-- Placeholder section for now -->
+    </section>
+
+    <section id="skills" class="max-w-6xl mx-auto px-4 pb-24">
+      <!-- Placeholder section for now -->
+    </section>
+  </main>
+</div>
+{% endblock %}
